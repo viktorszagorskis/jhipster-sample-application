@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="briefingHistory">
+            <h2><span>Briefing History</span> {{briefingHistory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Start Date</span></dt>
+                <dd>
+                    <span>{{briefingHistory.startDate}}</span>
+                </dd>
+                <dt><span>End Date</span></dt>
+                <dd>
+                    <span>{{briefingHistory.endDate}}</span>
+                </dd>
+                <dt><span>Type Of Briefing</span></dt>
+                <dd>
+                    <span>{{briefingHistory.typeOfBriefing}}</span>
+                </dd>
+                <dt><span>Job</span></dt>
+                <dd>
+                    <div *ngIf="briefingHistory.job">
+                        <a [routerLink]="['/briefing', briefingHistory.job?.id, 'view']">{{briefingHistory.job?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Department</span></dt>
+                <dd>
+                    <div *ngIf="briefingHistory.department">
+                        <a [routerLink]="['/department', briefingHistory.department?.id, 'view']">{{briefingHistory.department?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Employee</span></dt>
+                <dd>
+                    <div *ngIf="briefingHistory.employee">
+                        <a [routerLink]="['/employee', briefingHistory.employee?.id, 'view']">{{briefingHistory.employee?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/briefing-history', briefingHistory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity BriefingHistory.
+    -->
+    <changeSet id="20191227130319-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="job_id"
+                                 baseTableName="briefing_history"
+                                 constraintName="fk_briefing_history_job_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="briefing"/>
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="briefing_history"
+                                 constraintName="fk_briefing_history_department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"/>
+
+        <addForeignKeyConstraint baseColumnNames="employee_id"
+                                 baseTableName="briefing_history"
+                                 constraintName="fk_briefing_history_employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+
+    </changeSet>
+</databaseChangeLog>

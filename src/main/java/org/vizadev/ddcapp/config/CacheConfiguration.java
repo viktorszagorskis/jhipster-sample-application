@@ -44,6 +44,20 @@ public class CacheConfiguration {
             createCache(cm, org.vizadev.ddcapp.domain.User.class.getName() + ".authorities");
             createCache(cm, org.vizadev.ddcapp.domain.PersistentToken.class.getName());
             createCache(cm, org.vizadev.ddcapp.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, org.vizadev.ddcapp.domain.Organization.class.getName());
+            createCache(cm, org.vizadev.ddcapp.domain.Organization.class.getName() + ".locations");
+            createCache(cm, org.vizadev.ddcapp.domain.Location.class.getName());
+            createCache(cm, org.vizadev.ddcapp.domain.Employee.class.getName());
+            createCache(cm, org.vizadev.ddcapp.domain.Employee.class.getName() + ".briefings");
+            createCache(cm, org.vizadev.ddcapp.domain.Employee.class.getName() + ".managers");
+            createCache(cm, org.vizadev.ddcapp.domain.Employee.class.getName() + ".departments");
+            createCache(cm, org.vizadev.ddcapp.domain.Department.class.getName());
+            createCache(cm, org.vizadev.ddcapp.domain.Department.class.getName() + ".employees");
+            createCache(cm, org.vizadev.ddcapp.domain.Task.class.getName());
+            createCache(cm, org.vizadev.ddcapp.domain.Task.class.getName() + ".briefings");
+            createCache(cm, org.vizadev.ddcapp.domain.Briefing.class.getName());
+            createCache(cm, org.vizadev.ddcapp.domain.Briefing.class.getName() + ".tasks");
+            createCache(cm, org.vizadev.ddcapp.domain.BriefingHistory.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
