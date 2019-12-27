@@ -1,0 +1,118 @@
+entity Organization {
+	orgName String required
+    orgRegNum String required
+    
+}
+
+
+enum RegionName {
+   RIGA, KURZEME, VIDZEME, LATGALE, ZEMGALE
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Location {
+	streetAddress String required
+	postalCode String required
+	city String required
+    regionName RegionName 
+}
+relationship OneToMany {
+	Organization {location} to Location
+}
+
+
+/**
+ * The Employee entity.
+ */
+entity Employee {
+	/**
+	* The firstname attribute.
+	*/
+    umane String required,
+	firstName String,
+	lastName String,
+	email String required,
+	phoneNumber String,
+	hireDate Instant
+}
+
+
+entity Department {
+	departmentName String required
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Task {
+	title String,
+	description String,
+    maxScoring Long,
+    h5pLink String,
+    link String
+}
+
+
+
+entity Briefing {
+	briefTitle String,
+	scoring Long
+}
+
+entity BriefingHistory {
+	startDate Instant,
+	endDate Instant,
+	typeOfBriefing TypeOfBriefing
+}
+
+enum TypeOfBriefing {
+   INTROBR, WORKBR, IGNISBR
+}
+
+
+relationship OneToOne {
+	Department{location} to Location
+}
+
+relationship ManyToMany {
+	Briefing{task(title)} to Task{briefing},
+    	/**
+	* A relationship
+	*/
+	Department{employee(uname)} to
+	/**
+	* Another side of the same relationship
+	*/
+	Employee{department}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Employee{briefing} to Briefing
+}
+
+relationship OneToMany {
+	Employee{manager} to Employee
+}
+
+// defining multiple oneToOne relationships
+relationship OneToOne {
+	BriefingHistory{job} to Briefing,
+	BriefingHistory{department} to Department,
+	BriefingHistory{employee} to Employee
+}
+
+// Set pagination options
+paginate BriefingHistory, Employee with infinite-scroll
+paginate Briefing with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Employee, Briefing
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
