@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="briefing">
+            <h2><span>Briefing</span> {{briefing.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Brief Title</span></dt>
+                <dd>
+                    <span>{{briefing.briefTitle}}</span>
+                </dd>
+                <dt><span>Scoring</span></dt>
+                <dd>
+                    <span>{{briefing.scoring}}</span>
+                </dd>
+                <dt><span>Task</span></dt>
+                <dd>
+                    <span *ngFor="let task of briefing.tasks; let last = last">
+                        <a [routerLink]="['/task', task?.id, 'view' ]">{{task.title}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Employee</span></dt>
+                <dd>
+                    <div *ngIf="briefing.employee">
+                        <a [routerLink]="['/employee', briefing.employee?.id, 'view']">{{briefing.employee?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/briefing', briefing.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

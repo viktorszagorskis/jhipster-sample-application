@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-location-heading">Create or edit a Location</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_streetAddress">Street Address</label>
+                    <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
+                           formControlName="streetAddress"/>
+                    <div *ngIf="editForm.get('streetAddress')!.invalid && (editForm.get('streetAddress')!.dirty || editForm.get('streetAddress')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('streetAddress')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_postalCode">Postal Code</label>
+                    <input type="text" class="form-control" name="postalCode" id="field_postalCode"
+                           formControlName="postalCode"/>
+                    <div *ngIf="editForm.get('postalCode')!.invalid && (editForm.get('postalCode')!.dirty || editForm.get('postalCode')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('postalCode')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_city">City</label>
+                    <input type="text" class="form-control" name="city" id="field_city"
+                           formControlName="city"/>
+                    <div *ngIf="editForm.get('city')!.invalid && (editForm.get('city')!.dirty || editForm.get('city')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('city')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_regionName">Region Name</label>
+                    <select class="form-control" name="regionName" formControlName="regionName" id="field_regionName">
+                        <option value="RIGA">RIGA</option>
+                        <option value="KURZEME">KURZEME</option>
+                        <option value="VIDZEME">VIDZEME</option>
+                        <option value="LATGALE">LATGALE</option>
+                        <option value="ZEMGALE">ZEMGALE</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_organization">Organization</label>
+                    <select class="form-control" id="field_organization" name="organization" formControlName="organization">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organizationOption.id === editForm.get('organization')!.value?.id ? editForm.get('organization')!.value : organizationOption" *ngFor="let organizationOption of organizations; trackBy: trackById">{{organizationOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
